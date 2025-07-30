@@ -3,94 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>특별한 하루</title>
+    <title>토끼를 위한 특별한 게임</title>
     <style>
-        /* 음악 컨트롤 스타일 */
-        .music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(233, 30, 99, 0.9);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .music-control:hover {
-            background: rgba(233, 30, 99, 1);
-            transform: scale(1.1);
-        }
-
-        .music-control.playing {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(233, 30, 99, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
-        }
-
-        .start-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            flex-direction: column;
-        }
-
-        .start-content {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .start-title {
-            font-size: 32px;
-            color: #e91e63;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .start-subtitle {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .start-button {
-            background: #e91e63;
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            border-radius: 25px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .start-button:hover {
-            background: #c2185b;
-            transform: translateY(-2px);
-        }
-
         body {
             margin: 0;
             padding: 0;
@@ -112,6 +26,57 @@
             width: 90%;
         }
 
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .start-content {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .start-title {
+            font-size: 32px;
+            color: #e91e63;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .start-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .start-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .start-button:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
         .stage-title {
             font-size: 24px;
             color: #e91e63;
@@ -126,6 +91,53 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        .game-instruction {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            color: #e91e63;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .text-input {
+            padding: 15px;
+            border: 2px solid #e91e63;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            margin: 15px 0;
+            max-width: 300px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #c2185b;
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
+        }
+
+        .submit-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
         }
 
         .number-grid, .letter-grid {
@@ -173,58 +185,26 @@
 
         .message {
             font-size: 20px;
-            color: #333;
+            color: #e91e63;
             line-height: 1.6;
             margin: 20px 0;
             padding: 30px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            border-left: 4px solid #e91e63;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 3px solid #e91e63;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .message-container {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 20px 0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .message-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.3;
-            filter: blur(2px);
-        }
-
-        .message-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(233, 30, 99, 0.8) 0%, 
-                rgba(255, 182, 193, 0.8) 50%, 
-                rgba(233, 30, 99, 0.8) 100%);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .photo {
             max-width: 100%;
+            width: 400px;
             height: 300px;
             object-fit: cover;
             border-radius: 15px;
             margin: 20px 0;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 3px solid #e91e63;
         }
 
         .progress {
@@ -243,78 +223,53 @@
             transition: width 0.5s ease;
         }
 
-        .next-button {
-            background: #e91e63;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .next-button:hover {
-            background: #c2185b;
-            transform: translateY(-2px);
-        }
-
         .countdown {
             font-size: 18px;
             color: #e91e63;
             margin: 10px 0;
+            font-weight: bold;
         }
 
         .hidden {
             display: none;
         }
 
-        .game-instruction {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .text-input {
-            padding: 15px;
-            border: 2px solid #e91e63;
-            border-radius: 10px;
-            font-size: 18px;
-            text-align: center;
-            margin: 15px 0;
-            max-width: 300px;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .text-input:focus {
-            outline: none;
-            border-color: #c2185b;
-            box-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
-        }
-
-        .submit-button {
-            background: #e91e63;
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(233, 30, 99, 0.9);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 16px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
             cursor: pointer;
-            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            z-index: 1000;
         }
 
-        .submit-button:hover {
-            background: #c2185b;
-            transform: translateY(-2px);
+        .music-control:hover {
+            background: rgba(233, 30, 99, 1);
+            transform: scale(1.1);
         }
 
-        .question-text {
-            font-size: 20px;
-            color: #e91e63;
-            margin: 20px 0;
-            font-weight: bold;
+        .music-control.playing {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(233, 30, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(233, 30, 99, 0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
     </style>
 </head>
@@ -323,9 +278,7 @@
     <div class="start-screen" id="startScreen">
         <div class="start-content">
             <div class="start-title">💕 특별한 선물 💕</div>
-            <div class="start-subtitle">
-                토끼를 위한 특별한 게임이 준비되어 있어요
-            </div>
+            <div class="start-subtitle">토끼를 위한 특별한 게임이 준비되어 있어요</div>
             <button class="start-button" onclick="startGame()">🎵 시작하기 🎵</button>
         </div>
     </div>
@@ -333,18 +286,13 @@
     <!-- 음악 컨트롤 버튼 -->
     <button class="music-control hidden" id="musicControl" onclick="toggleMusic()">🎵</button>
     
-    <!-- 유튜브 음악 (숨겨진 iframe) -->
+    <!-- 유튜브 음악 -->
     <iframe id="youtubePlayer" width="0" height="0" style="display:none;"
             src="https://www.youtube.com/embed/O2j6Y6MdI-4?autoplay=1&loop=1&playlist=O2j6Y6MdI-4&controls=0&mute=0&start=0"
             title="Background Music" frameborder="0" allow="autoplay; encrypted-media">
     </iframe>
 
-    <!-- 배경 음악 (로컬 파일 백업용) -->
-    <audio id="backgroundMusic" loop style="display:none;">
-        <source src="music/background.mp3" type="audio/mpeg">
-        <source src="music/background.wav" type="audio/wav">
-    </audio>
-
+    <!-- 메인 게임 컨테이너 -->
     <div class="container hidden" id="mainContainer">
         <div class="progress">
             <div class="progress-bar" id="progressBar"></div>
@@ -353,15 +301,14 @@
         <div class="stage-title" id="stageTitle">1단계</div>
         
         <div class="game-area" id="gameArea">
-            <div class="game-instruction" id="instruction">우리가 처음 만날 날</div>
-            <!-- 게임 영역이 여기에 동적으로 생성됩니다 -->
+            <!-- 게임 영역 -->
         </div>
         
         <div class="countdown hidden" id="countdown"></div>
     </div>
 
     <script>
-        // 설정 정보
+        // 게임 설정
         const gameConfig = {
             stages: [
                 {
@@ -369,7 +316,7 @@
                     question: '우리가 처음 만날 날',
                     answer: '20230402',
                     message: '사랑하는 정은이에게 💕',
-                    photo: 'https://calsuem.github.io/proposal-app/images/photo1.jpg'
+                    photo: 'images/photo1.jpg'
                 },
                 {
                     type: 'letters',
@@ -444,7 +391,7 @@
         let gameCompleted = false;
         let musicPlaying = false;
 
-        // 게임 시작 함수
+        // 게임 시작
         function startGame() {
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('mainContainer').classList.remove('hidden');
@@ -453,13 +400,11 @@
             initGame();
         }
 
-        // 음악 재생/일시정지
+        // 음악 컨트롤
         function toggleMusic() {
-            const audio = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
             
             if (musicPlaying) {
-                audio.pause();
                 musicControl.textContent = '🔇';
                 musicControl.classList.remove('playing');
                 musicPlaying = false;
@@ -468,7 +413,6 @@
             }
         }
 
-        // 음악 재생
         function playMusic() {
             const musicControl = document.getElementById('musicControl');
             musicControl.textContent = '🎵';
@@ -476,11 +420,13 @@
             musicPlaying = true;
         }
 
+        // 진행률 업데이트
         function updateProgress() {
             const progress = ((currentStage) / gameConfig.stages.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
         }
 
+        // 숫자 버튼 생성
         function generateNumberButtons(start, end) {
             const numbers = [];
             for (let i = start; i <= end; i++) {
@@ -493,6 +439,7 @@
             return numbers;
         }
 
+        // 알파벳 버튼 생성
         function generateLetterButtons(startLetter, endLetter) {
             const letters = [];
             const start = startLetter.charCodeAt(0);
@@ -507,6 +454,7 @@
             return letters;
         }
 
+        // 게임 버튼 생성
         function createGameButtons(stage) {
             const gameArea = document.getElementById('gameArea');
             gameArea.innerHTML = '';
@@ -598,6 +546,7 @@
             `;
         }
 
+        // 텍스트 입력 처리
         function handleTextSubmit() {
             if (gameCompleted) return;
             
@@ -618,6 +567,7 @@
             }
         }
 
+        // 버튼 클릭 처리
         function handleClick(value) {
             if (gameCompleted) return;
 
@@ -647,17 +597,24 @@
             }
         }
 
+        // 메시지 및 사진 표시
         function showMessage() {
             const stage = gameConfig.stages[currentStage];
             const gameArea = document.getElementById('gameArea');
             
-            gameArea.innerHTML = `
-                <div class="message-container">
-                    <img src="${stage.photo}" alt="배경 사진" class="message-background" onerror="this.style.display='none'">
-                    <div class="message-overlay"></div>
+            // 사진이 있는지 확인
+            if (stage.photo && stage.photo !== '') {
+                gameArea.innerHTML = `
                     <div class="message">${stage.message}</div>
-                </div>
-            `;
+                    <img src="${stage.photo}" alt="추억의 사진" class="photo" 
+                         onerror="console.log('사진 로드 실패: ${stage.photo}'); this.style.display='none';"
+                         onload="console.log('사진 로드 성공: ${stage.photo}');">
+                `;
+            } else {
+                gameArea.innerHTML = `
+                    <div class="message">${stage.message}</div>
+                `;
+            }
             
             setTimeout(() => {
                 nextStage();
@@ -666,6 +623,7 @@
             showCountdown();
         }
 
+        // 카운트다운 표시
         function showCountdown() {
             const countdownEl = document.getElementById('countdown');
             countdownEl.classList.remove('hidden');
@@ -683,6 +641,7 @@
             }, 1000);
         }
 
+        // 다음 단계로
         function nextStage() {
             currentStage++;
             
@@ -700,40 +659,27 @@
             createGameButtons(gameConfig.stages[currentStage]);
         }
 
+        // 최종 메시지
         function showFinalMessage() {
             const gameArea = document.getElementById('gameArea');
             document.getElementById('stageTitle').textContent = '완료! 🎉';
             
             gameArea.innerHTML = `
-                <div class="message" style="font-size: 24px; color: #e91e63;">
+                <div class="message" style="font-size: 24px;">
                     🎊 축하합니다! 🎊<br><br>
                     모든 단계를 완료하셨습니다!<br>
-                    이제 가나디를 바라봐 주세요 💕
+                    당신은 정말 특별한 사람이에요 💕
                 </div>
             `;
             
             document.getElementById('progressBar').style.width = '100%';
         }
 
+        // 게임 초기화
         function initGame() {
             updateProgress();
             createGameButtons(gameConfig.stages[currentStage]);
         }
-
-        window.onload = function() {
-            const audio = document.getElementById('backgroundMusic');
-            audio.volume = 0.3;
-        };
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

@@ -327,7 +327,7 @@
     
     <!-- 유튜브 음악 (숨겨진 iframe) -->
     <iframe id="youtubePlayer" width="0" height="0" style="display:none;"
-            src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?autoplay=1&loop=1&playlist=YOUR_YOUTUBE_VIDEO_ID&controls=0&mute=0&start=0"
+            src="https://www.youtube.com/embed/O2j6Y6MdI-4?autoplay=1&loop=1&playlist=O2j6Y6MdI-4&controls=0&mute=0&start=0"
             title="Background Music" frameborder="0" allow="autoplay; encrypted-media">
     </iframe>
 
@@ -469,20 +469,10 @@
         function playMusic() {
             const musicControl = document.getElementById('musicControl');
             
-            // 유튜브 iframe이 있는지 확인
-            const youtubePlayer = document.getElementById('youtubePlayer');
-            if (youtubePlayer && youtubePlayer.src.includes('YOUR_YOUTUBE_VIDEO_ID')) {
-                // 유튜브 URL이 설정되어 있지 않은 경우 로컬 파일 사용
-                playLocalMusic();
-            } else if (youtubePlayer) {
-                // 유튜브 음악 재생 (자동재생)
-                musicControl.textContent = '🎵';
-                musicControl.classList.add('playing');
-                musicPlaying = true;
-            } else {
-                // 유튜브가 없으면 로컬 파일 사용
-                playLocalMusic();
-            }
+            // 유튜브 음악 재생 (자동재생)
+            musicControl.textContent = '🎵';
+            musicControl.classList.add('playing');
+            musicPlaying = true;
         }
 
         // 로컬 음악 파일 재생

@@ -90,6 +90,7 @@
             background: #c2185b;
             transform: translateY(-2px);
         }
+
         body {
             margin: 0;
             padding: 0;
@@ -269,6 +270,12 @@
             display: none;
         }
 
+        .game-instruction {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
         .text-input {
             padding: 15px;
             border: 2px solid #e91e63;
@@ -303,10 +310,11 @@
             transform: translateY(-2px);
         }
 
-        .game-instruction {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 20px;
+        .question-text {
+            font-size: 20px;
+            color: #e91e63;
+            margin: 20px 0;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -345,7 +353,7 @@
         <div class="stage-title" id="stageTitle">1단계</div>
         
         <div class="game-area" id="gameArea">
-            <div class="game-instruction" id="instruction">1부터 10까지 순서대로 클릭해주세요 💕</div>
+            <div class="game-instruction" id="instruction">우리가 처음 만날 날</div>
             <!-- 게임 영역이 여기에 동적으로 생성됩니다 -->
         </div>
         
@@ -353,7 +361,7 @@
     </div>
 
     <script>
-        // 설정 정보 - 여기서 수정하세요!
+        // 설정 정보
         const gameConfig = {
             stages: [
                 {
@@ -427,7 +435,7 @@
                     photo: 'images/photo10.jpg'
                 }
             ],
-            autoNextDelay: 5000 // 5초 후 자동으로 다음 단계 (밀리초)
+            autoNextDelay: 5000
         };
 
         let currentStage = 0;
@@ -438,15 +446,10 @@
 
         // 게임 시작 함수
         function startGame() {
-            // 시작 화면 숨기기
             document.getElementById('startScreen').style.display = 'none';
             document.getElementById('mainContainer').classList.remove('hidden');
             document.getElementById('musicControl').classList.remove('hidden');
-            
-            // 음악 시작
             playMusic();
-            
-            // 게임 초기화
             initGame();
         }
 
@@ -465,29 +468,12 @@
             }
         }
 
-        // 음악 재생 (유튜브 우선, 로컬 파일 백업)
+        // 음악 재생
         function playMusic() {
             const musicControl = document.getElementById('musicControl');
-            
-            // 유튜브 음악 재생 (자동재생)
             musicControl.textContent = '🎵';
             musicControl.classList.add('playing');
             musicPlaying = true;
-        }
-
-        // 로컬 음악 파일 재생
-        function playLocalMusic() {
-            const audio = document.getElementById('backgroundMusic');
-            const musicControl = document.getElementById('musicControl');
-            
-            audio.play().then(() => {
-                musicControl.textContent = '🎵';
-                musicControl.classList.add('playing');
-                musicPlaying = true;
-            }).catch((error) => {
-                console.log('음악 재생 실패:', error);
-                musicControl.textContent = '🔇';
-            });
         }
 
         function updateProgress() {
@@ -500,7 +486,6 @@
             for (let i = start; i <= end; i++) {
                 numbers.push(i);
             }
-            // 순서 섞기
             for (let i = numbers.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
@@ -515,7 +500,6 @@
             for (let i = start; i <= end; i++) {
                 letters.push(String.fromCharCode(i));
             }
-            // 순서 섞기
             for (let i = letters.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [letters[i], letters[j]] = [letters[j], letters[i]];
@@ -625,7 +609,6 @@
                 gameCompleted = true;
                 showMessage();
             } else {
-                // 틀렸을 때 효과
                 input.style.animation = 'shake 0.5s';
                 input.style.borderColor = '#f44336';
                 setTimeout(() => {
@@ -643,7 +626,6 @@
             if (value === expectedValue) {
                 currentSequence.push(value);
                 
-                // 버튼 스타일 변경
                 const buttons = document.querySelectorAll('.number-btn, .letter-btn');
                 buttons.forEach(btn => {
                     if (btn.textContent === value) {
@@ -652,13 +634,11 @@
                     }
                 });
                 
-                // 단계 완료 체크
                 if (currentSequence.length === expectedSequence.length) {
                     gameCompleted = true;
                     showMessage();
                 }
             } else {
-                // 틀렸을 때 효과
                 const gameArea = document.getElementById('gameArea');
                 gameArea.style.animation = 'shake 0.5s';
                 setTimeout(() => {
@@ -679,12 +659,10 @@
                 </div>
             `;
             
-            // 자동으로 다음 단계로
             setTimeout(() => {
                 nextStage();
             }, gameConfig.autoNextDelay);
             
-            // 카운트다운 표시
             showCountdown();
         }
 
@@ -709,17 +687,14 @@
             currentStage++;
             
             if (currentStage >= gameConfig.stages.length) {
-                // 모든 단계 완료
                 showFinalMessage();
                 return;
             }
             
-            // 다음 단계 초기화
             currentSequence = [];
             expectedSequence = [];
             gameCompleted = false;
             
-            // UI 업데이트
             document.getElementById('stageTitle').textContent = `${currentStage + 1}단계`;
             updateProgress();
             createGameButtons(gameConfig.stages[currentStage]);
@@ -733,27 +708,23 @@
                 <div class="message" style="font-size: 24px; color: #e91e63;">
                     🎊 축하합니다! 🎊<br><br>
                     모든 단계를 완료하셨습니다!<br>
-                    당신은 정말 특별한 사람이에요 💕
+                    이제 가나디를 바라봐 주세요 💕
                 </div>
             `;
             
-            // 프로그레스 바 100% 완료
             document.getElementById('progressBar').style.width = '100%';
         }
 
-        // 게임 시작
         function initGame() {
             updateProgress();
             createGameButtons(gameConfig.stages[currentStage]);
         }
 
-        // 페이지 로드 시 음악 볼륨 설정
         window.onload = function() {
             const audio = document.getElementById('backgroundMusic');
-            audio.volume = 0.3; // 볼륨을 30%로 설정 (0.0 ~ 1.0)
+            audio.volume = 0.3;
         };
 
-        // CSS 애니메이션 추가
         const style = document.createElement('style');
         style.textContent = `
             @keyframes shake {
